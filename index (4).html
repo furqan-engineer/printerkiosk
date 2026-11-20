@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smart Grid Buddy</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--pink:#ffd6e8;--pink2:#ff8fc0;--mint:#c9f2e3;--mint2:#4fcf9f;--sky:#d3e9ff;--sky2:#5aa9ff;--lemon:#fff3b8;--ink:#5b4a6b;--card:#ffffffcc}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Fredoka',system-ui,sans-serif;color:var(--ink);
+background:radial-gradient(circle at 10% 10%,var(--pink) 0,transparent 40%),radial-gradient(circle at 90% 20%,var(--sky) 0,transparent 40%),radial-gradient(circle at 50% 100%,var(--mint) 0,transparent 45%),#fff8fc;min-height:100vh}
+.wrap{max-width:960px;margin:0 auto;padding:24px 16px 60px}
+header{text-align:center;padding:20px 0 8px}
+.mascot{font-size:64px;animation:bob 2.4s ease-in-out infinite;display:inline-block}
+@keyframes bob{50%{transform:translateY(-10px) rotate(4deg)}}
+h1{margin:6px 0;font-size:clamp(28px,6vw,46px);color:var(--pink2);text-shadow:3px 3px 0 #fff}
+.sub{opacity:.8;margin:0}
+.card{background:var(--card);border:3px solid #fff;border-radius:28px;padding:22px;margin-top:22px;box-shadow:0 10px 30px #c79ad933}
+h2{margin:0 0 14px;font-size:22px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.stat{border-radius:22px;padding:18px;text-align:center}
+.stat.c{background:var(--lemon)}.stat.e{background:var(--mint)}.stat.d{background:var(--sky)}
+.stat .em{font-size:34px}
+.stat .t{font-weight:600;margin:4px 0 10px}
+.row{display:flex;justify-content:space-between;font-size:15px;padding:3px 0}
+.row b{font-variant-numeric:tabular-nums}
+.pill{display:inline-block;margin-top:10px;padding:6px 14px;border-radius:999px;font-weight:700;color:#fff}
+.good{background:var(--mint2)}.meh{background:#ffa66b}
+.timer{text-align:center}
+.clock{font-size:clamp(44px,12vw,80px);font-weight:700;color:var(--sky2);font-variant-numeric:tabular-nums;letter-spacing:2px}
+.bar{height:22px;background:#fff;border-radius:999px;overflow:hidden;border:3px solid var(--pink);margin:10px auto;max-width:560px}
+.bar i{display:block;height:100%;width:0;background:repeating-linear-gradient(45deg,var(--pink2),var(--pink2) 12px,#ffb3d5 12px,#ffb3d5 24px);border-radius:999px;transition:width .5s}
+button{font:inherit;font-weight:600;border:0;border-radius:999px;padding:12px 26px;margin:6px;cursor:pointer;color:#fff;background:var(--pink2);box-shadow:0 5px 0 #d96a9f;transition:.1s}
+button:active{transform:translateY(4px);box-shadow:0 1px 0 #d96a9f}
+button.alt{background:var(--sky2);box-shadow:0 5px 0 #3b82d6}
+.msg{min-height:24px}
+table{width:100%;border-collapse:separate;border-spacing:0 8px;font-size:14px}
+th{font-weight:600;text-align:left;padding:4px 10px;opacity:.7}
+td{background:#fff;padding:10px;font-variant-numeric:tabular-nums}
+td:first-child{border-radius:14px 0 0 14px}td:last-child{border-radius:0 14px 14px 0}
+.team{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
+.member{background:#fff;border-radius:22px;padding:16px;text-align:center;border:3px dashed var(--pink)}
+.member:nth-child(2){border-color:var(--sky)}.member:nth-child(3){border-color:var(--mint)}.member:nth-child(4){border-color:#ffe27a}
+.av{font-size:38px}
+.roll{display:inline-block;margin-top:6px;background:var(--lemon);border-radius:999px;padding:3px 12px;font-size:13px;font-weight:600}
+footer{text-align:center;margin-top:30px;opacity:.7;font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="mascot">⚡🐰</div>
+  <h1>Smart Grid Buddy</h1>
+  <p class="sub">PPO agent vs. rule-based baseline · 24h episode ✨</p>
+</header>
+
+<section class="card">
+  <h2>🌸 Latest Results</h2>
+  <div class="grid">
+    <div class="stat c"><div class="em">💰</div><div class="t">Total Cost</div>
+      <div class="row"><span>Baseline</span><b>379,507.25</b></div>
+      <div class="row"><span>PPO</span><b>380,734.70</b></div>
+      <span class="pill meh">+0.32% (about equal)</span></div>
+    <div class="stat e"><div class="em">🌱</div><div class="t">Total Emissions</div>
+      <div class="row"><span>Baseline</span><b>8,443.51</b></div>
+      <div class="row"><span>PPO</span><b>7,595.31</b></div>
+      <span class="pill good">−10.05% 🎉</span></div>
+    <div class="stat d"><div class="em">🔌</div><div class="t">Total Deficit</div>
+      <div class="row"><span>Baseline</span><b>296.62</b></div>
+      <div class="row"><span>PPO</span><b>5.53</b></div>
+      <span class="pill good">−98.14% 🎉</span></div>
+  </div>
+</section>
+
+<section class="card timer">
+  <h2>⏳ Run Timer</h2>
+  <div class="clock" id="clock">00:00</div>
+  <div class="bar"><i id="fill"></i></div>
+  <div class="msg" id="msg">Press the button to start a run (counts up to 90 minutes) 💤</div>
+  <button id="start">▶ Run again</button>
+  <button class="alt" id="reset">↺ Reset</button>
+</section>
+
+<section class="card">
+  <h2>📒 Results History</h2>
+  <table>
+    <thead><tr><th>#</th><th>When</th><th>Cost (Base / PPO)</th><th>CO₂ (Base / PPO)</th><th>Deficit (Base / PPO)</th></tr></thead>
+    <tbody id="hist"></tbody>
+  </table>
+  <button class="alt" id="clear">🧹 Clear extra runs</button>
+</section>
+
+<section class="card">
+  <h2>🎀 Our Team</h2>
+  <div class="team">
+    <div class="member"><div class="av">🐱</div><b>Muhammad Furqan Ali</b><br><span class="roll">CT-24295</span></div>
+    <div class="member"><div class="av">🐻</div><b>Syed Ibrahim Aziz</b><br><span class="roll">CT-24289</span></div>
+    <div class="member"><div class="av">🐼</div><b>Syed Talal bin Rizwan</b><br><span class="roll">CT-24124</span></div>
+    <div class="member"><div class="av">🦊</div><b>Saad ullah Khan</b><br><span class="roll">CT-24142</span></div>
+  </div>
+</section>
+
+<footer>Made with 💖 using Stable-Baselines3 · Gymnasium · PPO</footer>
+</div>
+
+<script>
+const TOTAL = 90*60;               // 90 minutes in seconds
+const KEY_H = 'sg_history', KEY_T = 'sg_start';
+const seed = {when:'Run #1 (original)', cost:[379507.25,380734.70], co2:[8443.51,7595.31], def:[296.62,5.53]};
+const f = n => n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const $ = id => document.getElementById(id);
+const safe = (fn,d) => { try{return fn()}catch(e){return d} };
+
+function getHist(){ return safe(()=>JSON.parse(localStorage.getItem(KEY_H)),null) || [seed]; }
+function setHist(h){ safe(()=>localStorage.setItem(KEY_H,JSON.stringify(h))); }
+function renderHist(){
+  const h = getHist();
+  $('hist').innerHTML = h.slice().reverse().map((r,i)=>`<tr><td>${h.length-i}</td><td>${r.when}</td>
+    <td>${f(r.cost[0])} / ${f(r.cost[1])}</td><td>${f(r.co2[0])} / ${f(r.co2[1])}</td><td>${f(r.def[0])} / ${f(r.def[1])}</td></tr>`).join('');
+}
+
+let timer=null;
+function tick(){
+  const start = +safe(()=>localStorage.getItem(KEY_T),0);
+  if(!start) return;
+  const s = Math.min(TOTAL, Math.floor((Date.now()-start)/1000));
+  $('clock').textContent = String(Math.floor(s/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+  $('fill').style.width = (s/TOTAL*100)+'%';
+  if(s>=TOTAL){
+    clearInterval(timer); timer=null;
+    $('msg').textContent = '🎉 90 minutes done! Yay!';
+    safe(()=>localStorage.removeItem(KEY_T));
+    $('start').disabled=false;
+  } else $('msg').textContent = '🐰 Training hard... '+Math.round(s/TOTAL*100)+'% done';
+}
+function begin(){
+  if(timer) return;
+  safe(()=>localStorage.setItem(KEY_T,Date.now()));
+  // log this run in history using the same measured results
+  const h = getHist();
+  h.push({...seed, when:'Run #'+(h.length+1)+' · '+new Date().toLocaleString()});
+  setHist(h); renderHist();
+  $('start').disabled=true; tick(); timer=setInterval(tick,1000);
+}
+$('start').onclick = begin;
+$('reset').onclick = ()=>{
+  clearInterval(timer); timer=null; safe(()=>localStorage.removeItem(KEY_T));
+  $('clock').textContent='00:00'; $('fill').style.width='0'; $('start').disabled=false;
+  $('msg').textContent='Reset! Ready when you are 💤';
+};
+$('clear').onclick = ()=>{ setHist([seed]); renderHist(); };
+
+renderHist();
+// resume a run that was already going if the page was refreshed
+if(+safe(()=>localStorage.getItem(KEY_T),0)){ $('start').disabled=true; tick(); timer=setInterval(tick,1000); }
+</script>
+</body>
+</html>
